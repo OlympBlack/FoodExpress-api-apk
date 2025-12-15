@@ -1,4 +1,4 @@
-# API CHELSY Restaurant
+# API FoodExpress Restaurant
 
 API REST pour la gestion d'un restaurant avec commandes en ligne, paiements, notifications push et suivi GPS des livreurs.
 
@@ -49,8 +49,8 @@ L'API couvre les fonctionnalités principales d'un restaurant en ligne :
 
 1. **Cloner le projet**
 ```bash
-git clone https://github.com/iamrachking/api-chelsy-apk
-cd api-chelsy-apk
+git clone https://github.com/OlympBlack/FoodExpress-api-apk.git
+cd FoodExpress-api-apk
 ```
 
 2. **Installer les dépendances**
@@ -78,7 +78,7 @@ Configurez votre base de données dans `.env` :
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=chelsy_restaurant
+DB_DATABASE=FoodExpress_restaurant
 DB_USERNAME=root
 DB_PASSWORD=
 ```
@@ -93,13 +93,13 @@ php artisan migrate --seed
 Placez votre fichier JSON Firebase dans `storage/app/firebase-credentials.json` et ajoutez dans `.env` :
 ```env
 FIREBASE_CREDENTIALS_PATH=storage/app/firebase-credentials.json
-FIREBASE_PROJECT_ID=chelsy-restaurant
+FIREBASE_PROJECT_ID=FoodExpress-restaurant
 ```
 
 Ou utilisez une Server Key :
 ```env
 FIREBASE_SERVER_KEY=votre_server_key_ici
-FIREBASE_PROJECT_ID=chelsy-restaurant
+FIREBASE_PROJECT_ID=FoodExpress-restaurant
 ```
 
 6. **Stripe (paiements)**
@@ -115,8 +115,12 @@ STRIPE_WEBHOOK_SECRET=whsec_...
 ```bash
 php artisan storage:link
 ```
+7. **Installer les dependences npm**
+```bash
+npm install
+```
 
-8. **Compiler les assets** (si nécessaire)
+9. **Compiler les assets** (si nécessaire)
 ```bash
 npm run build
 ```
@@ -130,14 +134,14 @@ Générez la documentation :
 php artisan l5-swagger:generate
 ```
 
-Accédez à la documentation : `http://api-chelsy-apk.test/api/documentation`
+Accédez à la documentation : `http://FoodExpress-api-apk.test/api/documentation`
 
 ### Tester avec REST Client
 
-Le fichier `CHELSY_API.http` contient tous les endpoints testables. Vous pouvez utiliser REST Client ou un autre outil si vous avez du temps pour s'amuser.
+Le fichier `FoodExpress_API.http` contient tous les endpoints testables. Vous pouvez utiliser REST Client ou un autre outil si vous avez du temps pour s'amuser.
 
 1. Installez l'extension "REST Client" dans VS Code
-2. Ouvrez `CHELSY_API.http`
+2. Ouvrez `FoodExpress_API.http`
 3. Suivez les étapes numérotées
 4. Après le login, copiez le token dans la variable `@token`
 
@@ -163,7 +167,7 @@ Le fichier `CHELSY_API.http` contient tous les endpoints testables. Vous pouvez 
 - `POST /api/v1/delivery/position` - Mettre à jour la position (livreur)
 - `GET /api/v1/orders/{order_id}/tracking` - Suivre une commande (client)
 
-Voir `CHELSY_API.http` pour la liste complète.
+Voir `FoodExpress_API.http` pour la liste complète.
 
 ## Structure du projet
 
@@ -212,7 +216,7 @@ php artisan migrate:fresh --seed
 ## Compte admin par défaut
 
 Après avoir exécuté les seeders :
-- Email : `admin@chelsy-restaurant.bj`
+- Email : `admin@FoodExpress-restaurant.bj`
 - Mot de passe : `admin123`
 
 ## Notes importantes
@@ -225,8 +229,8 @@ Après avoir exécuté les seeders :
 ## Support
 
 Pour toute question ou problème :
-- Documentation Swagger : `http://api-chelsy-apk.test/api/documentation`
-- Fichier `CHELSY_API.http` pour tester les endpoints avec REST Client
+- Documentation Swagger : `http://api-FoodExpress-apk.test/api/documentation`
+- Fichier `FoodExpress_API.http` pour tester les endpoints avec REST Client
 
 En cas de problème, contactez-moi sur WhatsApp : https://wa.me/2295447002
 
