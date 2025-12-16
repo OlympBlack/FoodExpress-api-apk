@@ -1,10 +1,10 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "CHELSY Restaurant API",
-        "description": "API REST pour l'application mobile CHELSY Restaurant",
+        "title": "FoodExpress Restaurant API",
+        "description": "API REST pour l'application mobile FoodExpress Restaurant",
         "contact": {
-            "email": "contact@chelsy-restaurant.bj"
+            "email": "contact@foodexpress.bj"
         },
         "version": "1.0.0"
     },
