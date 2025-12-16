@@ -13,6 +13,20 @@ use Illuminate\Support\Facades\Storage;
     <link rel="apple-touch-icon" href="{{ asset('images/favicon.svg') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#0A1F44',
+                        accent: '#FFA500',
+                    }
+                }
+            }
+        }
+    </script>
+
     @stack('styles')
     @vite(['resources/js/app.js'])
     <style>
@@ -25,69 +39,47 @@ use Illuminate\Support\Facades\Storage;
     </style>
 </head>
 <body class="bg-gray-50">
+
     <!-- Sidebar -->
-    <div id="sidebar" class="sidebar fixed inset-y-0 left-0 z-50 w-64 bg-gradient-to-b from-blue-600 to-blue-800 text-white transform transition-transform duration-300 ease-in-out">
-        <div class="flex items-center justify-between h-16 px-6 border-b border-blue-500">
+    <div id="sidebar" class="sidebar fixed inset-y-0 left-0 z-50 w-64 bg-primary text-white transform transition-transform duration-300 ease-in-out">
+        <div class="flex items-center justify-between h-16 px-6 border-b border-accent">
             <h1 class="text-xl font-bold flex items-center">
                 <i class="fas fa-utensils mr-2"></i>
                 CHELSY Admin
             </h1>
-            <button id="sidebarToggle" class="lg:hidden text-white hover:text-gray-200">
+            <button id="sidebarToggle" class="lg:hidden text-white hover:text-primary">
                 <i class="fas fa-times"></i>
             </button>
         </div>
         <nav class="mt-6">
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.dashboard') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-chart-line w-5 mr-3"></i>
-                Dashboard
+            @php
+            $menuItems = [
+                ['route'=>'admin.dashboard','icon'=>'fa-chart-line','label'=>'Dashboard'],
+                ['route'=>'admin.restaurant','icon'=>'fa-store','label'=>'Restaurant'],
+                ['route'=>'admin.categories','icon'=>'fa-tags','label'=>'Catégories'],
+                ['route'=>'admin.dishes','icon'=>'fa-hamburger','label'=>'Plats'],
+                ['route'=>'admin.orders','icon'=>'fa-shopping-cart','label'=>'Commandes'],
+                ['route'=>'admin.reviews','icon'=>'fa-star','label'=>'Avis'],
+                ['route'=>'admin.complaints','icon'=>'fa-exclamation-triangle','label'=>'Réclamations'],
+                ['route'=>'admin.promo-codes','icon'=>'fa-ticket-alt','label'=>'Codes Promo'],
+                ['route'=>'admin.banners','icon'=>'fa-image','label'=>'Bannières'],
+                ['route'=>'admin.faqs','icon'=>'fa-question-circle','label'=>'FAQ'],
+                ['route'=>'admin.users','icon'=>'fa-users','label'=>'Utilisateurs'],
+                ['route'=>'admin.profile','icon'=>'fa-user-circle','label'=>'Mon Profil'],
+            ];
+            @endphp
+
+            @foreach($menuItems as $item)
+            <a href="{{ route($item['route']) }}" 
+               class="flex items-center px-6 py-3 text-white bg-primary hover:bg-accent hover:text-primary transition-colors
+               {{ request()->routeIs($item['route'].'*') ? 'bg-accent text-primary border-r-4 border-yellow-400' : '' }}">
+                <i class="fas {{ $item['icon'] }} w-5 mr-3"></i>
+                {{ $item['label'] }}
             </a>
-            <a href="{{ route('admin.restaurant') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.restaurant*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-store w-5 mr-3"></i>
-                Restaurant
-            </a>
-            <a href="{{ route('admin.categories') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.categories*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-tags w-5 mr-3"></i>
-                Catégories
-            </a>
-            <a href="{{ route('admin.dishes') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.dishes*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-hamburger w-5 mr-3"></i>
-                Plats
-            </a>
-            <a href="{{ route('admin.orders') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.orders*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-shopping-cart w-5 mr-3"></i>
-                Commandes
-            </a>
-            <a href="{{ route('admin.reviews') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.reviews*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-star w-5 mr-3"></i>
-                Avis
-            </a>
-            <a href="{{ route('admin.complaints') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.complaints*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-exclamation-triangle w-5 mr-3"></i>
-                Réclamations
-            </a>
-            <a href="{{ route('admin.promo-codes') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.promo-codes*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-ticket-alt w-5 mr-3"></i>
-                Codes Promo
-            </a>
-            <a href="{{ route('admin.banners') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.banners*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-image w-5 mr-3"></i>
-                Bannières
-            </a>
-            <a href="{{ route('admin.faqs') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.faqs*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-question-circle w-5 mr-3"></i>
-                FAQ
-            </a>
-            <a href="{{ route('admin.users') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.users*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-users w-5 mr-3"></i>
-                Utilisateurs
-            </a>
-            <a href="{{ route('admin.profile') }}" class="flex items-center px-6 py-3 text-white hover:bg-blue-700 transition-colors {{ request()->routeIs('admin.profile*') ? 'bg-blue-700 border-r-4 border-yellow-400' : '' }}">
-                <i class="fas fa-user-circle w-5 mr-3"></i>
-                Mon Profil
-            </a>
+            @endforeach
         </nav>
-        <div class="absolute bottom-0 w-full p-6 border-t border-blue-500">
-            <button id="logoutBtn" class="flex items-center w-full px-4 py-2 text-white hover:bg-red-600 rounded transition-colors">
+        <div class="absolute bottom-0 w-full p-6 border-t border-accent">
+            <button id="logoutBtn" class="flex items-center w-full px-4 py-2 text-white hover:text-primary hover:bg-accent rounded transition-colors">
                 <i class="fas fa-sign-out-alt w-5 mr-3"></i>
                 Déconnexion
             </button>
@@ -109,16 +101,15 @@ use Illuminate\Support\Facades\Storage;
                     $user = auth()->user();
                     $avatarUrl = $user->avatar ? Storage::url($user->avatar) : null;
                 @endphp
-                <a href="{{ route('admin.profile') }}" class="flex items-center space-x-3 hover:opacity-80 transition-opacity ml-auto flex-row-reverse ">
-                    
+                <a href="{{ route('admin.profile') }}" class="flex items-center space-x-3 hover:opacity-80 transition-opacity ml-auto flex-row-reverse">
                     @if($avatarUrl)
-                        <img src="{{ $avatarUrl }}" alt="{{ $user->firstname }} {{ $user->lastname }}" class="w-10 h-10 rounded-full object-cover border-2 border-blue-500 ml-3">
+                        <img src="{{ $avatarUrl }}" alt="{{ $user->firstname }} {{ $user->lastname }}" class="w-10 h-10 rounded-full object-cover border-2 border-accent ml-3">
                     @else
-                        <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center border-2 border-blue-500 ml-3">
+                        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center border-2 border-accent ml-3">
                             <i class="fas fa-user text-white text-sm"></i>
                         </div>
                     @endif
-                    <span class="text-gray-700 font-semibold  ">
+                    <span class="text-gray-700 font-semibold">
                         {{ $user->firstname }} {{ $user->lastname }}
                     </span>
                 </a>
@@ -127,7 +118,6 @@ use Illuminate\Support\Facades\Storage;
 
         <!-- Content -->
         <main class="p-6">
-            <!-- Les notifications sont maintenant gérées par Toastr dans le script -->
             @if($errors->any())
                 <div class="mb-4 bg-red-50 border-l-4 border-red-400 p-4 rounded">
                     <div class="flex items-center">
@@ -156,7 +146,6 @@ use Illuminate\Support\Facades\Storage;
         document.getElementById('sidebarToggle')?.addEventListener('click', () => {
             document.getElementById('sidebar').classList.toggle('sidebar-hidden');
         });
-
 
         // SweetAlert pour la déconnexion
         document.getElementById('logoutBtn')?.addEventListener('click', function() {

@@ -10,14 +10,14 @@ use Illuminate\Support\Str;
 <div class="space-y-6">
     <!-- Bouton Export Stats -->
     <div class="flex justify-end">
-        <a href="{{ route('admin.dashboard.export-stats') }}" class="flex items-center px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-all shadow-lg">
+        <a href="{{ route('admin.dashboard.export-stats') }}" class="flex items-center px-4 py-2 bg-primary text-white rounded-lg hover:bg-indigo-700 transition-all shadow-lg">
             <i class="fas fa-file-export mr-2"></i>
             Exporter les statistiques (CSV)
         </a>
     </div>
     <!-- Stats Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
+        <div class="bg-gradient-to-br bg-primary rounded-xl duration-300 ease-in-out shadow-lg p-6 text-white transform hover:scale-105 transition-transform">
             <div class="flex items-center justify-between">
                 <div>
                     <p class="text-blue-100 text-sm font-medium">Commandes Aujourd'hui</p>
@@ -224,7 +224,7 @@ use Illuminate\Support\Str;
 
     <!-- Recent Orders -->
     <div class="bg-white rounded-xl shadow-lg border border-gray-200 overflow-hidden">
-        <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
+        <div class="bg-primary text-white px-6 py-4">
             <h2 class="text-xl font-bold text-white flex items-center">
                 <i class="fas fa-clock mr-3"></i>
                 Commandes Récentes
